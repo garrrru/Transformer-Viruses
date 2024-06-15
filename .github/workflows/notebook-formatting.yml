@@ -25,9 +25,11 @@ jobs:
           git config --global user.email "flam0799@gmail.com"
           git config --global user.name "Elias Xu"
       - name: Check for changes
+        id: changes
         run: |
-          git diff --quiet || git commit -am "Automated formatting changes"
+          git diff --quiet && echo "::set-output name=changed::false" || echo "::set-output name=changed::true"
       - name: Create Pull Request
+        if: steps.changes.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.WORKFLOW_GITHUB_TOKEN }}
