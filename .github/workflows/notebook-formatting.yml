@@ -1,0 +1,41 @@
+name: Notebook Formatting
+
+on: [push, pull_request]
+
+jobs:
+  formatting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install black nbstripout nbconvert
+
+      - name: Strip output and metadata
+        run: |
+          find . -name "*.ipynb" -exec nbstripout {} \;
+
+      - name: Convert notebooks to scripts
+        run: |
+          find . -name "*.ipynb" -exec jupyter nbconvert --to script {} \;
+
+      - name: Run Black on scripts
+        run: |
+          find . -name "*.py" -exec black {} \;
+
+      - name: Convert scripts back to notebooks
+        run: |
+          find . -name "*.py" -exec jupyter nbconvert --to notebook --execute --inplace {} \;
+
+      - name: Check for changes
+        run: |
+          git diff --exit-code || (echo "Formatting changes detected, please commit them." && exit 1)
