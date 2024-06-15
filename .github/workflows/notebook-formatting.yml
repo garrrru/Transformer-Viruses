@@ -17,11 +17,11 @@ jobs:
           pip install "black[jupyter]"
           pip install jupyter
           pip install --upgrade pip setuptools wheel
-          pip install nb_black
       - name: Format notebooks
         run: |
-          find . -name "*.ipynb" -exec jupyter nbconvert --to notebook --inplace --execute {} \;
-          find . -name "*.ipynb" -exec black {} \;
+          find . -name "*.ipynb" -exec jupyter nbconvert --to script {} \;
+          find . -name "*.py" -exec black {} \;
+          find . -name "*.py" -exec jupyter nbconvert --to notebook {} \;
       - name: Set Git Identity
         run: |
           git config --global user.email "flam0799@gmail.com"
