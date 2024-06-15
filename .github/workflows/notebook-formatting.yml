@@ -41,3 +41,4 @@ jobs:
           title: "Automated formatting changes"
           body: "This is an auto-generated PR with formatting changes."
           branch: "formatting-changes"
+          base: 'main'  # replace 'main' with your default branch if it's different
