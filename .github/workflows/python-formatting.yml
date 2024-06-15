@@ -22,7 +22,26 @@ jobs:
           pip install "black[jupyter]"
 
       - name: Run Black
-        run: black --check .
+        run: / 
+          black --check .
+          black *.py
+          
+      - name: Set Git Identity
+        run: |
+          git config --global user.email "flam0799@gmail.com"
+          git config --global user.name "Elias Xu"
+      - name: Check for changes
+        id: changes
+        run: |
+          git diff --quiet && echo "::set-output name=changed::false" || echo "::set-output name=changed::true"
+      - name: Create Pull Request
+        if: steps.changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.WORKFLOW_GITHUB_TOKEN }}
+          commit-message: "Automated formatting changes"
+          title: "Automated formatting changes"
+          body: "This is an auto-generated PR with formatting changes."
+          branch: "formatting-changes"
+          base: "main" # replace 'main' with your default branch if it's different
 
-      - name: Run isort
-        run: isort --check-only .
