@@ -22,10 +22,10 @@ jobs:
           pip install "black[jupyter]"
 
       - name: Run Black
-        run: / 
+        run: |
           black --check .
           black *.py
-          
+
       - name: Set Git Identity
         run: |
           git config --global user.email "flam0799@gmail.com"
