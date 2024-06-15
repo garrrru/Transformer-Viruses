@@ -19,9 +19,7 @@ jobs:
           pip install --upgrade pip setuptools wheel
       - name: Format notebooks
         run: |
-          find . -name "*.ipynb" -exec jupyter nbconvert --to script {} \;
-          find . -name "*.py" -exec black {} \;
-          find . -name "*.py" -exec jupyter nbconvert --to notebook {} \;
+          black *.ipynb
       - name: Set Git Identity
         run: |
           git config --global user.email "flam0799@gmail.com"
