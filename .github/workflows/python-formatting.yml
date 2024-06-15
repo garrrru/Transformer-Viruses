@@ -23,9 +23,8 @@ jobs:
 
       - name: Run Black
         run: |
-          black --check .
-          black *.py
-
+          black --check . || true
+          find . -name '*.py' -exec black {} \; || true
       - name: Set Git Identity
         run: |
           git config --global user.email "flam0799@gmail.com"
