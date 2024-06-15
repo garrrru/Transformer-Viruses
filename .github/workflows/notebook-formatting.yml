@@ -36,7 +36,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.WORKFLOW_GITHUB_TOKEN }}
           commit-message: "Automated formatting changes"
           title: "Automated formatting changes"
           body: "This is an auto-generated PR with formatting changes."
