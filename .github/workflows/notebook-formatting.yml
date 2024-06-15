@@ -15,10 +15,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install "black[jupyter]"
           pip install jupyter
-          pip install nb_black
       - name: Format notebooks
         run: |
-          find . -name "*.ipynb" -exec jupyter nbconvert --to notebook --inplace --execute --nb_black {} \;   
+          find . -name "*.ipynb" -exec jupyter nbconvert --to notebook --inplace --execute --nb_black {} \;      
       - name: Set Git Identity
         run: |
           git config --global user.email "flam0799@gmail.com"
