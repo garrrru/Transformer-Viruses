@@ -17,9 +17,7 @@ jobs:
           pip install jupyter
       - name: Format notebooks
         run: |
-          find . -name "*.ipynb" -exec jupyter nbconvert --to python {} \;
-          find . -name "*.py" -exec black {} \;
-          find . -name "*.py" -exec jupyter nbconvert --to notebook --execute --inplace {} \;
+          find . -name "*.ipynb" -exec jupyter nbconvert --to notebook --inplace --execute --nb_black {} \;   
       - name: Set Git Identity
         run: |
           git config --global user.email "flam0799@gmail.com"
