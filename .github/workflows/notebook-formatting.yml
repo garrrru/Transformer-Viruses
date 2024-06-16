@@ -19,7 +19,7 @@ jobs:
           pip install --upgrade pip setuptools wheel
       - name: Format notebooks
         run: |
-          black *.ipynb || true
+          find . -name "*.ipynb" -exec black {} \; || true
       - name: Set Git Identity
         run: |
           git config --global user.email "flam0799@gmail.com"
