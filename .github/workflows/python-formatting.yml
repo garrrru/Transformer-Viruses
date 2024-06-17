@@ -34,7 +34,7 @@ jobs:
         run: |
           git diff --quiet && echo "::set-output name=changed::false" || echo "::set-output name=changed::true"
       - name: Create Pull Request
-        if: steps.changes.outputs.changed == 'true'
+        if: steps.changes.outputs.changed == 'true' && github.event_name != 'pull_request'
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.WORKFLOW_GITHUB_TOKEN }}
@@ -44,3 +44,9 @@ jobs:
           branch: "formatting-changes"
           base: "main" # replace 'main' with your default branch if it's different
 
+       - name: Commit changes
+        if: steps.changes.outputs.changed == 'true' && github.event_name == 'pull_request'
+        run: |
+          git add .
+          git commit -m "Automated formatting changes"
+          git push
