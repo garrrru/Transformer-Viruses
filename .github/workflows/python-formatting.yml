@@ -37,8 +37,7 @@ jobs:
           body: "This is an auto-generated PR with formatting changes."
           branch: "formatting-changes"
           base: "main" # replace 'main' with your default branch if it's different
-
-       - name: Commit changes
+      - name: Commit changes
         if: steps.changes.outputs.changed == 'true' && github.event_name == 'pull_request'
         run: |
           git add .
