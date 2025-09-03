@@ -7,7 +7,7 @@ This project aims to use transformer models to analyze genomic data related to v
 The project is organized as follows:
 
 - `data/`: Contains the genomic data files.
-- `notebooks/`: Contains Jupyter notebooks for data analysis and model training.
+- `notebooks/`: Contains Jupyter notebooks for data analysis and models training.
 - `venv/`: Contains the Python virtual environment for the project.
 
 ## Getting Started
